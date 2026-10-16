@@ -1,0 +1,117 @@
+/* Configuración general */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f8fb;
+    color: #263238;
+}
+
+/* Cabecera */
+#header {
+    background-color: #087e8b;
+    color: white;
+    padding: 25px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+#header img {
+    width: 100px;
+    height: auto;
+}
+
+#header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+/* Zona principal */
+#main {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 40px 20px;
+}
+
+#main a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    min-height: 58px;
+    padding: 16px 20px;
+    background-color: #087e8b;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transition: background-color 0.25s,
+                transform 0.25s,
+                box-shadow 0.25s;
+}
+
+#main a:hover {
+    background-color: #05616b;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.16);
+}
+
+#main a:focus-visible {
+    outline: 3px solid #f2b134;
+    outline-offset: 4px;
+}
+
+/* Pie de página */
+#footer {
+    background-color: #e1edf2;
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 35px;
+    flex-wrap: wrap;
+    color: #263238;
+}
+
+/* Logotipo */
+#footer img {
+    width: 90px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Bloques de información */
+.footer-bloque {
+    flex: 1;
+    min-width: 220px;
+    max-width: 350px;
+}
+
+/* Títulos */
+.footer-bloque h3 {
+    margin: 0 0 12px;
+    color: #087e8b;
+    font-size: 18px;
+}
+
+/* Textos */
+.footer-bloque p {
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
