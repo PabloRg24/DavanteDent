@@ -115,3 +115,61 @@ body {
     line-height: 1.6;
 }
 
+/* Formulario de citas */
+#formulario-cita {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.campo label {
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #263238;
+}
+
+.campo input,
+.campo textarea {
+    padding: 10px;
+    border: 1px solid #cbd5da;
+    border-radius: 6px;
+    font: inherit;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    outline: 2px solid #087e8b;
+    border-color: #087e8b;
+}
+
+
+/* Botón de envío del formulario */
+#enviar-cita {
+    display: block;
+    margin: 25px auto 0;
+    padding: 12px 28px;
+    background-color: #087e8b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto al pasar el ratón */
+#enviar-cita:hover {
+    background-color: #05616b;
+}
