@@ -209,3 +209,37 @@ body {
 .volver-inicio a:hover {
     background-color: #05616b;
 }
+
+
+/* Tabla del listado de citas */
+#tabla-citas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: white;
+}
+
+/* Encabezados y celdas */
+#tabla-citas th,
+#tabla-citas td {
+    border: 1px solid #d1e1e5;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* Encabezados */
+#tabla-citas th {
+    background-color: #087e8b;
+    color: white;
+}
+
+/* Filas alternas */
+#tabla-citas tbody tr:nth-child(even) {
+    background-color: #f4f8fb;
+}
+
+/* Efecto al pasar el ratón */
+#tabla-citas tbody tr:hover {
+    background-color: #e1edf2;
+}

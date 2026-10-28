@@ -1,4 +1,26 @@
 
+function guardarCookie(nombre, valor) {
+    document.cookie =
+        nombre + "=" + encodeURIComponent(valor) +
+        "; max-age=2592000; path=/; SameSite=Lax";
+}
+
+
+function leerCookie(nombre) {
+    const cookies = document.cookie.split("; ");
+
+    for (let cookie of cookies) {
+        const [clave, ...partes] = cookie.split("=");
+
+        if (clave === nombre) {
+            return decodeURIComponent(partes.join("="));
+        }
+    }
+
+    return null;
+}
+
+
 function validateForm() {
     let valido = true;
 
@@ -95,8 +117,46 @@ function validateForm() {
         });
     });
 
-    document.getElementById("formulario-cita").addEventListener("submit", function (event) {
-        if (!validateForm()) {
-            event.preventDefault();
+    
+document.getElementById("formulario-cita").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!validateForm()) {
+        return;
+    }
+
+    // Creamos una nueva cita con los datos del formulario
+    const cita = new Cita(
+        document.getElementById("name").value.trim(),
+        document.getElementById("surname").value.trim(),
+        document.getElementById("dni").value.trim().toUpperCase(),
+        document.getElementById("phone").value.trim(),
+        document.getElementById("email").value.trim(),
+        document.getElementById("birthday").value,
+        document.getElementById("obser").value.trim(),
+        document.getElementById("date").value
+    );
+
+    // Recuperamos las citas guardadas anteriormente
+    let citas = [];
+    const datosGuardados = leerCookie("citas");
+
+    if (datosGuardados !== null) {
+        try {
+            citas = JSON.parse(datosGuardados);
+
+            if (!Array.isArray(citas)) {
+                citas = [];
+            }
+        } catch (error) {
+            alert("No se pudieron recuperar las citas guardadas.");
+            return;
         }
+    }
+
+    // Añadimos la nueva cita y guardamos todas
+    citas.push(cita);
+    guardarCookie("citas", JSON.stringify(citas));
+
+    alert("¡Cita guardada correctamente!");
 });
