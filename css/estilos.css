@@ -156,8 +156,7 @@ body {
 
 /* Botón de envío del formulario */
 #enviar-cita, #reset-cita {
-    display: block;
-    margin: 25px auto 0;
+    margin: 0;
     padding: 12px 28px;
     background-color: #087e8b;
     color: white;
@@ -169,21 +168,44 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Efecto al pasar el ratón */
-#enviar-cita:hover {
+#enviar-cita:hover, #reset-cita:hover {
     background-color: #05616b;
 }
-
 
 .botones-formulario {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
     flex-wrap: wrap;
 }
+
 
 .error {
     color: red;
     font-size: 13px;
     margin-top: 4px;
+}
+
+
+/* Enlace para volver a la página principal */
+.volver-inicio {
+    text-align: center;
+    margin: 0 auto 40px;
+}
+
+.volver-inicio a {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #087e8b;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.volver-inicio a:hover {
+    background-color: #05616b;
 }
