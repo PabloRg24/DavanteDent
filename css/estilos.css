@@ -155,7 +155,7 @@ body {
 
 
 /* Botón de envío del formulario */
-#enviar-cita {
+#enviar-cita, #reset-cita {
     display: block;
     margin: 25px auto 0;
     padding: 12px 28px;
@@ -172,4 +172,18 @@ body {
 /* Efecto al pasar el ratón */
 #enviar-cita:hover {
     background-color: #05616b;
+}
+
+
+.botones-formulario {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
 }
