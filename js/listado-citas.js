@@ -61,7 +61,7 @@ function mostrarCitas() {
         const celda = document.createElement("td");
 
         celda.textContent = "Todavía no hay citas registradas.";
-        celda.colSpan = 9;
+        celda.colSpan = 10;
 
         fila.appendChild(celda);
         cuerpoTabla.appendChild(fila);
@@ -69,10 +69,11 @@ function mostrarCitas() {
         return;
     } 
     // Recorremos todas las citas guardadas
-    citas.forEach(function (cita) {
+    citas.forEach(function (cita, indice) {
         const fila = document.createElement("tr");
 
         const datos = [
+            indice + 1,
             cita.fecha,
             cita.nombre,
             cita.apellidos,
@@ -122,8 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const botonModificar = event.target.closest(".boton-modificar");
 
         if (botonModificar && botonModificar.dataset.id) {
-            window.location.href =
-                "formulario.html?id=" + encodeURIComponent(botonModificar.dataset.id);
+            sessionStorage.setItem("idCitaModificar", botonModificar.dataset.id);
+            window.location.href = "formulario.html";
             return;
         }
         const botonEliminar = event.target.closest(".boton-eliminar");

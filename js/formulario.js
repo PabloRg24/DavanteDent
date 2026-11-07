@@ -110,9 +110,8 @@ function validateForm() {
     return valido;
 }
 
-    function cargarCitaParaModificar() {
-    const parametros = new URLSearchParams(window.location.search);
-    const idCita = parametros.get("id");
+function cargarCitaParaModificar() {
+    const idCita = sessionStorage.getItem("idCitaModificar");
 
     if (!idCita) {
         return;
@@ -127,6 +126,11 @@ function validateForm() {
         return;
     }
 
+    if (!Array.isArray(citas)) {
+        alert("No se pudieron recuperar las citas guardadas.");
+        return;
+    }
+
     const cita = citas.find(function (citaGuardada) {
         return String(citaGuardada.id) === idCita;
     });
@@ -135,6 +139,11 @@ function validateForm() {
         alert("No se ha encontrado la cita que quieres modificar.");
         return;
     }
+
+    const campoId = document.getElementById("id-cita");
+    campoId.value = idCita;
+    campoId.defaultValue = idCita;
+    sessionStorage.removeItem("idCitaModificar");
 
     document.getElementById("name").value = cita.nombre;
     document.getElementById("surname").value = cita.apellidos;
@@ -191,7 +200,7 @@ document.getElementById("formulario-cita").addEventListener("submit", function (
         }
     }
 
-const idCita = new URLSearchParams(window.location.search).get("id");
+const idCita = document.getElementById("id-cita").value;
 
 if (idCita) {
     const indiceCita = citas.findIndex(function (citaGuardada) {
