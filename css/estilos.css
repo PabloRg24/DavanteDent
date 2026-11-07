@@ -243,3 +243,44 @@ body {
 #tabla-citas tbody tr:hover {
     background-color: #e1edf2;
 }
+
+#tabla-citas tbody td:last-child:not([colspan]) {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 8px;
+}
+
+/* Botones de acciones de las citas */
+#tabla-citas .boton-modificar,
+#tabla-citas .boton-eliminar {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+#tabla-citas .boton-modificar {
+    background-color: #087e8b;
+}
+
+#tabla-citas .boton-modificar:hover {
+    background-color: #05616b;
+}
+
+#tabla-citas .boton-eliminar {
+    background-color: #c62828;
+}
+
+#tabla-citas .boton-eliminar:hover {
+    background-color: #9e1b1b;
+}
+
+#tabla-citas .boton-modificar:focus-visible,
+#tabla-citas .boton-eliminar:focus-visible {
+    outline: 3px solid #f2b134;
+    outline-offset: 2px;
+}

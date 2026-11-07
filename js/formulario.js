@@ -110,7 +110,44 @@ function validateForm() {
     return valido;
 }
 
+    function cargarCitaParaModificar() {
+    const parametros = new URLSearchParams(window.location.search);
+    const idCita = parametros.get("id");
 
+    if (!idCita) {
+        return;
+    }
+
+    let citas;
+
+    try {
+        citas = JSON.parse(leerCookie("citas") || "[]");
+    } catch (error) {
+        alert("No se pudieron recuperar las citas guardadas.");
+        return;
+    }
+
+    const cita = citas.find(function (citaGuardada) {
+        return String(citaGuardada.id) === idCita;
+    });
+
+    if (!cita) {
+        alert("No se ha encontrado la cita que quieres modificar.");
+        return;
+    }
+
+    document.getElementById("name").value = cita.nombre;
+    document.getElementById("surname").value = cita.apellidos;
+    document.getElementById("dni").value = cita.dni;
+    document.getElementById("phone").value = cita.telefono;
+    document.getElementById("email").value = cita.correo;
+    document.getElementById("birthday").value = cita.fechaNacimiento;
+    document.getElementById("obser").value = cita.observaciones;
+    document.getElementById("date").value = cita.fecha;
+}
+
+    cargarCitaParaModificar();
+    
     document.getElementById("formulario-cita").addEventListener("reset", function () {
         document.querySelectorAll(".error").forEach(function (mensaje) {
             mensaje.textContent = "";
@@ -154,9 +191,24 @@ document.getElementById("formulario-cita").addEventListener("submit", function (
         }
     }
 
-    // Añadimos la nueva cita y guardamos todas
-    citas.push(cita);
-    guardarCookie("citas", JSON.stringify(citas));
+const idCita = new URLSearchParams(window.location.search).get("id");
 
-    alert("¡Cita guardada correctamente!");
+if (idCita) {
+    const indiceCita = citas.findIndex(function (citaGuardada) {
+        return String(citaGuardada.id) === idCita;
+    });
+
+    if (indiceCita === -1) {
+        alert("No se ha encontrado la cita que quieres modificar.");
+        return;
+    }
+
+    cita.id = citas[indiceCita].id;
+    citas[indiceCita] = cita;
+} else {
+    citas.push(cita);
+}
+
+guardarCookie("citas", JSON.stringify(citas));
+alert(idCita ? "¡Cita modificada correctamente!" : "¡Cita guardada correctamente!");
 });

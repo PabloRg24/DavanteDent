@@ -13,6 +13,12 @@ function leerCookie(nombre) {
     return null;
 }
 
+function guardarCookie(nombre, valor) {
+    document.cookie =
+        nombre + "=" + encodeURIComponent(valor) +
+        "; max-age=2592000; path=/; SameSite=Lax";
+}
+
 function obtenerCitas() {
     const datos = leerCookie("citas");
 
@@ -26,6 +32,19 @@ function obtenerCitas() {
         console.error("No se han podido leer las citas:", error);
         return [];
     }
+}
+
+function eliminarCita(id) {
+    if (!confirm("¿Seguro que quieres eliminar esta cita?")) {
+        return;
+    }
+
+    const citasActualizadas = obtenerCitas().filter(function (cita) {
+        return String(cita.id) !== id;
+    });
+
+    guardarCookie("citas", JSON.stringify(citasActualizadas));
+    mostrarCitas();
 }
 
 function mostrarCitas() {
@@ -61,8 +80,7 @@ function mostrarCitas() {
             cita.telefono,
             cita.correo,
             cita.fechaNacimiento,
-            cita.observaciones,
-            ""
+            cita.observaciones
         ];
 
         datos.forEach(function (dato) {
@@ -71,9 +89,47 @@ function mostrarCitas() {
             fila.appendChild(celda);
         });
 
+        const celdaAcciones = document.createElement("td");
+        
+        const botonModificar = document.createElement("button");
+        botonModificar.type = "button";
+        botonModificar.textContent = "Modificar";
+        botonModificar.className = "boton-modificar";
+        botonModificar.dataset.id = cita.id;
+        
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.className = "boton-eliminar";
+        botonEliminar.dataset.id = cita.id;
+        
+        celdaAcciones.appendChild(botonModificar);
+        celdaAcciones.appendChild(botonEliminar);
+        fila.appendChild(celdaAcciones);
+
         cuerpoTabla.appendChild(fila);
     });
 
 }
 
-document.addEventListener("DOMContentLoaded", mostrarCitas);
+document.addEventListener("DOMContentLoaded", function () {
+    mostrarCitas();
+
+    document.getElementById("cuerpo-tabla").addEventListener("click", function (event) {
+        if (!(event.target instanceof Element)) {
+            return;
+        }
+        const botonModificar = event.target.closest(".boton-modificar");
+
+        if (botonModificar && botonModificar.dataset.id) {
+            window.location.href =
+                "formulario.html?id=" + encodeURIComponent(botonModificar.dataset.id);
+            return;
+        }
+        const botonEliminar = event.target.closest(".boton-eliminar");
+
+        if (botonEliminar && botonEliminar.dataset.id) {
+            eliminarCita(botonEliminar.dataset.id);
+        }
+    });
+});
