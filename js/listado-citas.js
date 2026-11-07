@@ -1,24 +1,4 @@
 
-function leerCookie(nombre) {
-    const cookies = document.cookie.split("; ");
-
-    for (let cookie of cookies) {
-        const [clave, valor] = cookie.split("=");
-
-        if (clave === nombre) {
-            return decodeURIComponent(valor);
-        }
-    }
-
-    return null;
-}
-
-function guardarCookie(nombre, valor) {
-    document.cookie =
-        nombre + "=" + encodeURIComponent(valor) +
-        "; max-age=2592000; path=/; SameSite=Lax";
-}
-
 function obtenerCitas() {
     const datos = leerCookie("citas");
 
